@@ -117,6 +117,13 @@ class SpreadsheetToCsv
                         continue;
                     }
 
+                    // As functions seem to find there way into other column types; if PhpSpreadsheet
+                    // says this is a function cell then lets just treat it as such
+                    if (ColumnConfigInterface::CELL_TYPE_FUNCTION === $worksheetCell->getDataType()) {
+                        $csvRow[] = $this->getFunctionValue($worksheetCell);
+                        continue;
+                    }
+
                     switch ($columnConfig->getType()) {
                         case ColumnConfigInterface::CELL_TYPE_STRING:
                             $csvRow[] = $this->getStringValue($worksheetCell);
