@@ -21,6 +21,8 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
  */
 class SpreadsheetToCsv
 {
+    public const MAX_SKIPPED_ROWS = 300;
+
     /**
      * @var FileReaderInterface
      */
@@ -71,6 +73,7 @@ class SpreadsheetToCsv
 
         $csv   = [];
         $csv[] = $this->config->getCsvHeader();
+        $skippedRowCount = 0;
 
         foreach ($worksheets as $worksheet) {
 
@@ -141,6 +144,12 @@ class SpreadsheetToCsv
                 }
 
                 if ($this->shouldSkipRow($csvRow)) {
+                    $skippedRowCount++;
+
+                    if ($skippedRowCount > self::MAX_SKIPPED_ROWS) {
+                        break;
+                    }
+
                     continue;
                 }
 
