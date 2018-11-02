@@ -73,11 +73,11 @@ class SpreadsheetToCsv
 
         $csv   = [];
         $csv[] = $this->config->getCsvHeader();
-        $skippedRowCount = 0;
 
         foreach ($worksheets as $worksheet) {
 
-            $worksheetName = $worksheet->getTitle();
+            $worksheetName   = $worksheet->getTitle();
+            $skippedRowCount = 0;
 
             foreach ($worksheet->getRowIterator() as $worksheetRow) {
 
