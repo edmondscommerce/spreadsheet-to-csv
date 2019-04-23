@@ -175,7 +175,7 @@ class SpreadsheetToCsv
      */
     protected function getStringValue(Cell $worksheetCell): string
     {
-        return $worksheetCell->getValue();
+        return (string)$worksheetCell->getValue();
     }
 
     /**
@@ -185,7 +185,7 @@ class SpreadsheetToCsv
      */
     protected function getNumberValue(Cell $worksheetCell): float
     {
-        return $worksheetCell->getValue();
+        return (float)$worksheetCell->getValue();
     }
 
     /**
